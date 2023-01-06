@@ -1,57 +1,45 @@
 <script lang="ts" setup>
-  import { inject, onMounted, reactive, computed } from 'vue';
-  import type UsersGateway from '~/infra/gateway/UsersGateway';
-  import type User from '~/@types/User';
+  import { reactive, ref } from 'vue';
+  import FormAddress from './components/FormAddress.vue';
+  import FormCredential from './components/FormCredential.vue';
+  import FormPersonal from './components/FormPersonal.vue';
 
-  const usersGateway = inject('usersGateway') as UsersGateway;
+  const currentTab = ref('FormAddress');
 
-  const data = reactive({
-    isLoading: true,
-    user: {} as User,
+  const formTabsInstance: any = {
+    FormAddress,
+    FormCredential,
+    FormPersonal,
+  };
+
+  const formTabs: any = reactive({
+    FormAddress: { label: '1' },
+    FormCredential: { label: '2' },
+    FormPersonal: { label: '3' },
   });
 
-  onMounted(async () => {
-    data.user = await usersGateway.getSingleUser(1);
-    data.isLoading = false;
-  });
-
-  const personalTitles = computed(() => (data.user.gender === 'male' ? 'Mr.' : 'Mrs.'));
+  const handleChangeTab = (value: string) => {
+    currentTab.value = value;
+  };
 </script>
 
 <template>
-  <main class="container mx-auto flex h-screen w-full items-center justify-center">
-    <div v-if="data.isLoading">loading</div>
-    <div
-      v-else
-      class="bg-amber/40 border-amber relative rounded-lg border p-5"
-    >
-      <div class="i-ph-x-bold hover:(scale-150 ) absolute -right-3 -top-3 text-2xl duration-300 ease-in-out" />
-      <div class="flex justify-center">
-        <img
-          :src="data.user.image"
-          :alt="`Avatar ${data.user.firstName}`"
-          class="bg-amber/40 border-amber h-16 w-16 rounded-full border"
-        />
+  <main class="container mx-auto flex h-screen w-full justify-center">
+    <div class="mx-auto mt-10 w-[900px]">
+      <div class="flex justify-around">
+        <button
+          v-for="(_, tab) in formTabs"
+          :key="tab"
+          class="border-primary-500 flex h-16 w-16 items-center justify-center rounded-full border"
+          :class="[
+            currentTab === tab.toString() ? 'bg-primary-500 text-primary-100' : 'bg-primary-100 text-primary-500',
+          ]"
+          @click="handleChangeTab(tab.toString())"
+        >
+          <span class="text-2xl font-bold">{{ formTabs[tab].label }}</span>
+        </button>
       </div>
-
-      <div>
-        <small class="text-sm font-bold">Name:</small>
-        <h2 class="text-lg">{{ personalTitles }} {{ data.user.firstName }} {{ data.user.lastName }}</h2>
-      </div>
-      <div>
-        <small class="text-sm font-bold">Age:</small>
-        <p>{{ data.user.age }}</p>
-      </div>
-      <div class="flex justify-between">
-        <div>
-          <small class="text-sm font-bold">City:</small>
-          <p>{{ data.user.address.city }}</p>
-        </div>
-        <div>
-          <small class="text-sm font-bold">State:</small>
-          <p>{{ data.user.address.state }}</p>
-        </div>
-      </div>
+      <component :is="formTabsInstance[currentTab]" />
     </div>
   </main>
 </template>
