@@ -4,18 +4,18 @@
   import FormCredential from './components/FormCredential.vue';
   import FormPersonal from './components/FormPersonal.vue';
 
-  const currentTab = ref('FormAddress');
+  const currentTab = ref('FormPersonal');
 
   const formTabsInstance: any = {
+    FormPersonal,
     FormAddress,
     FormCredential,
-    FormPersonal,
   };
 
   const formTabs: any = reactive({
-    FormAddress: { label: '1' },
-    FormCredential: { label: '2' },
-    FormPersonal: { label: '3' },
+    FormPersonal: { label: '1' },
+    FormAddress: { label: '2' },
+    FormCredential: { label: '3' },
   });
 
   const handleChangeTab = (value: string) => {
@@ -39,7 +39,9 @@
           <span class="text-2xl font-bold">{{ formTabs[tab].label }}</span>
         </button>
       </div>
-      <component :is="formTabsInstance[currentTab]" />
+      <div class="px-6">
+        <component :is="formTabsInstance[currentTab]" />
+      </div>
     </div>
   </main>
 </template>
