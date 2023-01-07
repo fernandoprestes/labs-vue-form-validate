@@ -14,6 +14,9 @@ Este repositório é um laboratorio de estudos e serve como um template para pro
 - [Prettier](https://prettier.io/)
 - [Stylelint](https://stylelint.io/)
 - [husky](https://typicode.github.io/husky/#/)
+- [VeeValidate](https://vee-validate.logaretm.com/v4/)
+- [yup](https://www.npmjs.com/package/yup)
+- [maska](https://github.com/beholdr/maska)
 
 ### Ferramentas recomendadas
 
