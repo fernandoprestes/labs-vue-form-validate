@@ -39,7 +39,7 @@
           <span class="text-2xl font-bold">{{ formTabs[tab].label }}</span>
         </button>
       </div>
-      <div class="px-6">
+      <div class="mt-10 px-6">
         <component :is="formTabsInstance[currentTab]" />
       </div>
     </div>

@@ -21,48 +21,62 @@
     @submit="onSubmit"
     @invalid-submit="onInvalidSubmit"
   >
-    <BaseInputVue
-      v-model="formData.fullName"
-      name="fullName"
-      label="Nome completo*"
-    />
-    <BaseInputVue
-      v-model="formData.individualRegistration"
-      v-maska
-      name="individualRegistration"
-      label="CPF*"
-      data-maska="###.###.###-##"
-    />
-    <BaseInputVue
-      v-model="formData.generalRecord"
-      v-maska
-      name="generalRecord"
-      label="RG"
-      data-maska="##.###.###-#"
-    />
-    <BaseInputVue
-      v-model="formData.age"
-      v-maska
-      name="age"
-      label="Idade*"
-      type="number"
-      data-maska="##"
-    />
-    <BaseInputVue
-      v-model="formData.birthDate"
-      v-maska
-      name="birthDate"
-      label="Aniversario"
-      data-maska="##/##/####"
-    />
-    <BaseInputVue
-      v-model="formData.phone"
-      v-maska
-      name="phone"
-      label="Telefone/celular"
-      placeholder="(00) 0000-0000 / (00) 00000-0000"
-      data-maska="['(##) ####-####', '(##) #####-####']"
-    />
+    <div class="grid">
+      <BaseInputVue
+        v-model="formData.fullName"
+        name="fullName"
+        label="Nome completo*"
+        placeholder="Seu nome completo"
+      />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <BaseInputVue
+        v-model="formData.individualRegistration"
+        v-maska
+        name="individualRegistration"
+        label="CPF*"
+        data-maska="###.###.###-##"
+        placeholder="000.000.000-00"
+      />
+      <BaseInputVue
+        v-model="formData.generalRecord"
+        v-maska
+        name="generalRecord"
+        label="RG"
+        data-maska="##.###.###-#"
+        placeholder="00.000.000-0"
+      />
+    </div>
+    <div class="grid grid-cols-12 gap-4">
+      <BaseInputVue
+        v-model="formData.age"
+        v-maska
+        name="age"
+        label="Idade*"
+        type="number"
+        data-maska="##"
+        class="col-span-4"
+        placeholder="00"
+      />
+      <BaseInputVue
+        v-model="formData.birthDate"
+        v-maska
+        name="birthDate"
+        label="Data de nascimento"
+        data-maska="##/##/####"
+        placeholder="00/00/0000"
+        class="col-span-4"
+      />
+      <BaseInputVue
+        v-model="formData.phone"
+        v-maska
+        name="phone"
+        label="Telefone/celular"
+        placeholder="(00) 0000-0000 / (00) 00000-0000"
+        data-maska="['(##) ####-####', '(##) #####-####']"
+        class="col-span-4"
+      />
+    </div>
     <div class="mt-8">
       <button
         type="submit"

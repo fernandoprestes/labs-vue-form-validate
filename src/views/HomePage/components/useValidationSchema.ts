@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 import { validateFullName, validateCPF } from '~/composables/useValidators';
 
+import * as zod from 'zod';
+import { toFormValidator } from '@vee-validate/zod';
+
 export const personalValidationSchema = Yup.object().shape({
   fullName: Yup.string()
     .test('validade-full-name', function (value) {
@@ -29,3 +32,14 @@ export const personalValidationSchema = Yup.object().shape({
   birthDate: Yup.string().notRequired(),
   phone: Yup.string().min(14, 'Telefone/celular incompleto').max(15).required('Um telefone é obrigatório'),
 });
+
+export const addressValidationSchema = toFormValidator(
+  zod.object({
+    postalCode: zod.string().min(8, 'CEP é obrigatório'),
+    address: zod.string().trim().min(1, 'Endereço é obrigatório'),
+    number: zod.string().optional(),
+    district: zod.string().min(1, 'O bairro é obrigatório'),
+    city: zod.string().min(1, 'A cidade é obrigatório'),
+    state: zod.string().min(1, 'A UF é obrigatório'),
+  }),
+);
