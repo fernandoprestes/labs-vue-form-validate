@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { validateFullName, validateCPF } from '~/composables/useValidators';
+import { validateFullName, validateCPF, validatePostalCode } from '~/composables/useValidators';
 
 import * as zod from 'zod';
 import { toFormValidator } from '@vee-validate/zod';
@@ -35,7 +35,7 @@ export const personalValidationSchema = Yup.object().shape({
 
 export const addressValidationSchema = toFormValidator(
   zod.object({
-    postalCode: zod.string().min(8, 'CEP é obrigatório'),
+    postalCode: zod.string().refine(validatePostalCode, 'CEP é obrigatório'),
     address: zod.string().trim().min(1, 'Endereço é obrigatório'),
     number: zod.string().optional(),
     district: zod.string().min(1, 'O bairro é obrigatório'),

@@ -18,22 +18,28 @@ export function validateFullName(fullName: string) {
   };
 }
 
+export function validatePostalCode(postalCode: string) {
+  const regexp = /^[0-9]{5}-[0-9]{3}$/;
+  const isPostalCodeValid = regexp.test(postalCode);
+  return isPostalCodeValid;
+}
+
 export function validateCPF(rawCpf: string) {
-  const cleanCpf = rawCpf.replace(/\D/g, '');
-  if (isInvalidLength(cleanCpf))
+  const onlyNumbersCPF = rawCpf.replace(/\D/g, '');
+  if (isInvalidLength(onlyNumbersCPF))
     return {
       isValid: false,
       errorMessage: 'CPF invalido',
     };
-  if (allDigitsTheSame(cleanCpf))
+  if (allDigitsTheSame(onlyNumbersCPF))
     return {
       isValid: false,
       errorMessage: 'CPF invalido',
     };
-  const digit1 = calculateDigit(cleanCpf, 10);
-  const digit2 = calculateDigit(cleanCpf, 11);
-  const actualDigit = extractDigits(cleanCpf);
-  const validatedDigit = `${digit1}${digit2}`;
+  const firstDigit = calculateDigit(onlyNumbersCPF, 10);
+  const secondDigit = calculateDigit(onlyNumbersCPF, 11);
+  const actualDigit = extractDigits(onlyNumbersCPF);
+  const validatedDigit = `${firstDigit}${secondDigit}`;
   const isValid = actualDigit === validatedDigit;
   if (isValid) return { isValid: true };
   return {
