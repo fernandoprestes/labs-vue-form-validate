@@ -1,11 +1,12 @@
 export function validateEmail(email: string) {
   const regexp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   const isEmailValid = regexp.test(email);
-  if (isEmailValid) return { isValid: true };
-  return {
-    isValid: false,
-    errorMessage: 'Deve ser um email valido',
-  };
+  return isEmailValid;
+}
+export function validadePassword(password: string) {
+  const regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+  const isPasswordStrong = regexp.test(password);
+  return isPasswordStrong;
 }
 
 export function validateFullName(fullName: string) {

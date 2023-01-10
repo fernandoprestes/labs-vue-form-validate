@@ -1,5 +1,11 @@
 import * as Yup from 'yup';
-import { validateFullName, validateCPF, validatePostalCode } from '~/composables/useValidators';
+import {
+  validateEmail,
+  validadePassword,
+  validateFullName,
+  validateCPF,
+  validatePostalCode,
+} from '~/composables/useValidators';
 
 import * as zod from 'zod';
 import { toFormValidator } from '@vee-validate/zod';
@@ -41,5 +47,12 @@ export const addressValidationSchema = toFormValidator(
     district: zod.string().min(1, 'O bairro é obrigatório'),
     city: zod.string().min(1, 'A cidade é obrigatório'),
     state: zod.string().min(1, 'A UF é obrigatório'),
+  }),
+);
+
+export const credentialValidationSchema = toFormValidator(
+  zod.object({
+    email: zod.string().refine(validateEmail, 'Um email valido é obrigatório'),
+    password: zod.string().trim().refine(validadePassword, 'Uma senha forte é obrigatória'),
   }),
 );
