@@ -1,6 +1,6 @@
-# Template para projetos com Vue3 + TS
+# Laboratório de teste: Validação de formulário
 
-Este repositório é um laboratorio de estudos e serve como um template para projetos de estudos usando as seguintes tecnologias:
+Exemplos de validação de formulário com [Vue.js](https://vuejs.org/) usando vee-validate com yup e/ou zod.
 
 ## Tecnologias
 
@@ -14,8 +14,10 @@ Este repositório é um laboratorio de estudos e serve como um template para pro
 - [Prettier](https://prettier.io/)
 - [Stylelint](https://stylelint.io/)
 - [husky](https://typicode.github.io/husky/#/)
+- [UnoCSS](https://github.com/unocss/unocss)
 - [VeeValidate](https://vee-validate.logaretm.com/v4/)
-- [yup](https://www.npmjs.com/package/yup)
+- [yup](https://github.com/jquense/yup)
+- [zod](https://github.com/colinhacks/zod)
 - [maska](https://github.com/beholdr/maska)
 
 ### Ferramentas recomendadas

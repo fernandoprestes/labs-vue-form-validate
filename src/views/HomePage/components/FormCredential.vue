@@ -54,7 +54,7 @@
       name="password"
       label="Senha*"
       type="password"
-      placeholder="****************"
+      placeholder="********"
     />
     <div class="ml-2 mt-4 flex flex-col">
       <div class="flex items-center gap-2">
