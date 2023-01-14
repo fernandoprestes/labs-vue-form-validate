@@ -18,6 +18,11 @@
     FormCredential: { label: '3' },
   });
 
+  const handleClickBtn = () => {
+    const btn = document.querySelector('#button-submit') as HTMLElement | null;
+    btn?.click();
+  };
+
   const handleChangeTab = (value: string) => {
     currentTab.value = value;
   };
@@ -34,13 +39,16 @@
           :class="[
             currentTab === tab.toString() ? 'bg-primary-500 text-primary-100' : 'bg-primary-100 text-primary-500',
           ]"
-          @click="handleChangeTab(tab.toString())"
+          @click="handleClickBtn"
         >
           <span class="text-2xl font-bold">{{ formTabs[tab].label }}</span>
         </button>
       </div>
       <div class="mt-10 px-6">
-        <component :is="formTabsInstance[currentTab]" />
+        <component
+          :is="formTabsInstance[currentTab]"
+          @on-validate-form="handleChangeTab"
+        />
       </div>
     </div>
   </main>

@@ -1,18 +1,24 @@
 import { reactive } from 'vue';
 
-export const formData = reactive({
+export const FormPersonalData = reactive({
   fullName: '',
   individualRegistration: '',
   generalRecord: '',
   age: '',
   birthDate: '',
   phone: '',
+});
+
+export const FormAddressData = reactive({
   postalCode: '',
   address: '',
   district: '',
+  number: '',
   city: '',
   state: '',
-  number: '',
+});
+
+export const FormCredentialData = reactive({
   email: '',
   password: '',
 });

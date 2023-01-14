@@ -4,26 +4,28 @@
   import BaseInputVue from '~/components/BaseInput.vue';
 
   import { personalValidationSchema } from './useValidationSchema';
-  import { formData } from './formData';
+  import { FormPersonalData } from './formData';
 
   const onInvalidSubmit = (errors: any) => {
     console.log(errors);
   };
 
+  const emit = defineEmits(['on-validate-form']);
   const onSubmit = () => {
-    console.log(formData);
+    emit('on-validate-form', 'FormAddress');
   };
 </script>
 
 <template>
   <Form
     :validation-schema="personalValidationSchema"
+    class="border-primary-500 bg-primary-100 rounded border py-4 px-6"
     @submit="onSubmit"
     @invalid-submit="onInvalidSubmit"
   >
     <div class="grid">
       <BaseInputVue
-        v-model="formData.fullName"
+        v-model="FormPersonalData.fullName"
         name="fullName"
         label="Nome completo*"
         placeholder="Seu nome completo"
@@ -31,7 +33,7 @@
     </div>
     <div class="grid grid-cols-2 gap-4">
       <BaseInputVue
-        v-model="formData.individualRegistration"
+        v-model="FormPersonalData.individualRegistration"
         v-maska
         name="individualRegistration"
         label="CPF*"
@@ -39,7 +41,7 @@
         placeholder="000.000.000-00"
       />
       <BaseInputVue
-        v-model="formData.generalRecord"
+        v-model="FormPersonalData.generalRecord"
         v-maska
         name="generalRecord"
         label="RG"
@@ -49,7 +51,7 @@
     </div>
     <div class="grid grid-cols-12 gap-4">
       <BaseInputVue
-        v-model="formData.age"
+        v-model="FormPersonalData.age"
         v-maska
         name="age"
         label="Idade*"
@@ -59,7 +61,7 @@
         placeholder="00"
       />
       <BaseInputVue
-        v-model="formData.birthDate"
+        v-model="FormPersonalData.birthDate"
         v-maska
         name="birthDate"
         label="Data de nascimento"
@@ -68,10 +70,10 @@
         class="col-span-4"
       />
       <BaseInputVue
-        v-model="formData.phone"
+        v-model="FormPersonalData.phone"
         v-maska
         name="phone"
-        label="Telefone/celular"
+        label="Telefone/celular*"
         placeholder="(00) 0000-0000 / (00) 00000-0000"
         data-maska="['(##) ####-####', '(##) #####-####']"
         class="col-span-4"
@@ -79,6 +81,7 @@
     </div>
     <div class="mt-8">
       <button
+        id="button-submit"
         type="submit"
         class="bg-primary-500 text-primary-100 hover:(bg-primary-600) rounded px-4 py-2"
       >
