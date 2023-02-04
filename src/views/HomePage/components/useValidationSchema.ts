@@ -1,14 +1,10 @@
 import * as Yup from 'yup';
-import {
-  validateEmail,
-  validadePassword,
-  validateFullName,
-  validateCPF,
-  validatePostalCode,
-} from '~/composables/useValidators';
-
 import * as zod from 'zod';
 import { toFormValidator } from '@vee-validate/zod';
+
+import validateCPF from '~/composables/useValidators/yup/ValidateCPF';
+import validateFullName from '~/composables/useValidators/yup/ValidateFullName';
+import { validadePassword, validateEmail, validatePostalCode } from '~/composables/useValidators/zod';
 
 export const personalValidationSchema = Yup.object().shape({
   fullName: Yup.string()

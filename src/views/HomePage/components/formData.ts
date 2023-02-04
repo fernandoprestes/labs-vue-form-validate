@@ -4,7 +4,7 @@ export const FormPersonalData = reactive({
   fullName: '',
   individualRegistration: '',
   generalRecord: '',
-  age: '',
+  age: 0,
   birthDate: '',
   phone: '',
 });

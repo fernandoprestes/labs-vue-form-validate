@@ -1,41 +1,27 @@
-export function validateEmail(email: string) {
-  const regexp = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-  const isEmailValid = regexp.test(email);
-  return isEmailValid;
-}
-export function validadePassword(password: string) {
-  const regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
-  const isPasswordStrong = regexp.test(password);
-  return isPasswordStrong;
-}
+import type { YupObjectsReturns } from '~/@models/YupObjectsReturns';
 
-export function validateFullName(fullName: string) {
-  const regexp = /^([a-zA-Z]{2,})+\s+([a-zA-Z\s]{2,})+$/i;
-  const isNameValid = regexp.test(fullName);
-  if (isNameValid) return { isValid: true };
-  return {
-    isValid: false,
-    errorMessage: 'Obrigatório nome e sobrenome',
-  };
-}
-
-export function validatePostalCode(postalCode: string) {
-  const regexp = /^[0-9]{5}-[0-9]{3}$/;
-  const isPostalCodeValid = regexp.test(postalCode);
-  return isPostalCodeValid;
-}
-
-export function validateCPF(rawCpf: string) {
+/**
+ * @description Returns an Object that indicates whether the CPF number (individual registration) is valid.
+ * @param {string} rawCpf '123.456.789-00'
+ * @returns {YupObjectsReturns} { isValid: boolean, errorMessage?: string }
+ * @example
+ *
+ * ```js
+ * const isValidCPF = isCPF('123.456.789-00') // { isValid: false, errorMessage: 'CPF inválido'}
+ * const isValidCPF = isCPF('157.406.800-85') // { isValid: true}
+ * ```
+ */
+export default (rawCpf: string): YupObjectsReturns => {
   const onlyNumbersCPF = rawCpf.replace(/\D/g, '');
   if (isInvalidLength(onlyNumbersCPF))
     return {
       isValid: false,
-      errorMessage: 'CPF invalido',
+      errorMessage: 'CPF inválido',
     };
   if (allDigitsTheSame(onlyNumbersCPF))
     return {
       isValid: false,
-      errorMessage: 'CPF invalido',
+      errorMessage: 'CPF inválido',
     };
   const firstDigit = calculateDigit(onlyNumbersCPF, 10);
   const secondDigit = calculateDigit(onlyNumbersCPF, 11);
@@ -45,9 +31,9 @@ export function validateCPF(rawCpf: string) {
   if (isValid) return { isValid: true };
   return {
     isValid: false,
-    errorMessage: 'CPF invalido',
+    errorMessage: 'CPF inválido',
   };
-}
+};
 
 function calculateDigit(cpf: string, factor: number) {
   let total = 0;
