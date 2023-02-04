@@ -6,13 +6,12 @@
   import { personalValidationSchema } from './useValidationSchema';
   import { FormPersonalData } from './formData';
 
-  const onInvalidSubmit = (errors: any) => {
-    console.log(errors);
-  };
-
   const emit = defineEmits(['on-validate-form']);
   const onSubmit = () => {
     emit('on-validate-form', 'FormAddress');
+  };
+  const onInvalidSubmit = (errors: any) => {
+    console.log(errors);
   };
 </script>
 
@@ -51,7 +50,7 @@
     </div>
     <div class="grid grid-cols-12 gap-4">
       <BaseInputVue
-        v-model="FormPersonalData.age"
+        v-model.number="FormPersonalData.age"
         v-maska
         name="age"
         label="Idade*"

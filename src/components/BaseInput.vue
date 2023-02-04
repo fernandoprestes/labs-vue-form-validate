@@ -2,14 +2,14 @@
   import { toRef, computed } from 'vue';
   import { useField } from 'vee-validate';
 
-  interface InputProps {
+  interface BaseInputProps {
     name: string;
     label: string;
     modelValue?: string | number;
     successMessage?: string;
     failedMessage?: string;
   }
-  const props = defineProps<InputProps>();
+  const props = defineProps<BaseInputProps>();
 
   const inputNameRef = toRef(props, 'name');
   const inputValueRef = toRef(props, 'modelValue');
@@ -35,8 +35,10 @@
     <input
       v-bind="$attrs"
       :id="name"
-      class="bg-primary-50 text-primary-900 pa-2 placeholder:(text-sm) rounded border outline-none"
-      :class="hasErrorMessage.value ? 'border-red-400' : 'border-primary-400'"
+      :class="[
+        'bg-primary-50 text-primary-900 pa-2 placeholder:(text-sm) rounded border outline-none',
+        hasErrorMessage.value ? 'border-red-400' : 'border-primary-400',
+      ]"
       :name="name"
       :value="inputValue"
       @input="handleChange"

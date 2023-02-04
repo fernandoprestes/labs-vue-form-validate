@@ -6,16 +6,17 @@
   import { addressValidationSchema } from './useValidationSchema';
   import { FormAddressData } from './formData';
 
-  const onInvalidSubmit = (errors: any) => {
-    console.log(errors);
-  };
-
   const emit = defineEmits(['on-validate-form']);
   const handleBackForm = () => {
     emit('on-validate-form', 'FormPersonal');
   };
+
   const onSubmit = () => {
     emit('on-validate-form', 'FormCredential');
+  };
+
+  const onInvalidSubmit = (errors: any) => {
+    console.log(errors);
   };
 </script>
 

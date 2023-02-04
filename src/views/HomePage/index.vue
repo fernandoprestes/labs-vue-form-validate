@@ -35,8 +35,8 @@
         <button
           v-for="(_, tab) in formTabs"
           :key="tab"
-          class="border-primary-500 flex h-16 w-16 items-center justify-center rounded-full border"
           :class="[
+            'border-primary-500 flex h-16 w-16 items-center justify-center rounded-full border',
             currentTab === tab.toString() ? 'bg-primary-500 text-primary-100' : 'bg-primary-100 text-primary-500',
           ]"
           @click="handleClickBtn"
