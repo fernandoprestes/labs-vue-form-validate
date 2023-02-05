@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import Unocss from 'unocss/vite';
@@ -22,5 +22,9 @@ export default defineConfig({
     alias: {
       '~/': `${PATH_SRC}/`,
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
   },
 });

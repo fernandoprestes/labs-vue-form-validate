@@ -21,6 +21,7 @@
     "preserveValueImports": true,
     "importsNotUsedAsValues": "error",
     "noEmit": true,
+    "types": ["vitest/globals"],
     "paths": {
       "~/*": ["src/*"]
     },
